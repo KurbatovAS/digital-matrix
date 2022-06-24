@@ -1,26 +1,26 @@
 import { useSelector, useDispatch } from "react-redux";
 import { nanoid } from "nanoid";
-import { set, cleanMatrix } from "../../redux/matrixArray/slice";
+import { set, cleanMatrix } from "../../redux/matrixData/slice";
 import createArrByM from "../../scripts/createArrByM";
-// import { useAmountRizer } from "../../hooks";
 import { useEffect } from "react";
-
-//  const { m, n, x } = useSelector((state) => state.inputData);
 
 function Matrix() {
   const dispatch = useDispatch();
+  const { m, n, x } = useSelector((state) => state.inputData);
 
-  const { m, n } = useSelector((state) => state.inputData);
+  console.log("m", m);
+  console.log("n", n);
+
+  const matrixArr = useSelector((state) => state.matrixData.data);
+  console.log("matrixArr", matrixArr);
 
   useEffect(() => {
     dispatch(cleanMatrix());
     dispatch(set(createArrByM(m, n)));
 
     // dispatch(cleanMatrix());
-    // dispatch(set(rowSum()));
+    dispatch(set(rowSum()));
   }, [dispatch, m, n]);
-
-  const matrixArr = useSelector((state) => state.matrixArray);
 
   function amountRiser(id) {
     const stringArr = JSON.stringify(matrixArr);
@@ -46,6 +46,22 @@ function Matrix() {
   }
 
   // useEffect(() => {
+  //   function rowSum() {
+  //     const stringArr = JSON.stringify(matrixArr);
+  //     const matrixArrCopy = JSON.parse(stringArr);
+  //     const newArr = [];
+
+  //     matrixArrCopy.forEach((el) => {
+  //       const rowSum = el.reduce(
+  //         (totalAmount, el) => totalAmount + el.amount,
+  //         0
+  //       );
+  //       el.push({ id: nanoid(), amount: rowSum });
+  //       newArr.push(el);
+  //     });
+
+  //     return newArr;
+  //   }
 
   //   dispatch(cleanMatrix());
   //   dispatch(set(rowSum()));
@@ -55,22 +71,7 @@ function Matrix() {
   // }, [dispatch, matrixArr]);
 
   function rowSum() {
-    const stringArr = JSON.stringify(matrixArr);
-    const matrixArrCopy = JSON.parse(stringArr);
-    const newArr = [];
-
-    matrixArrCopy.forEach((el) => {
-      const rowSum = el.reduce((totalAmount, el) => totalAmount + el.amount, 0);
-      el.push({ id: nanoid(), amount: rowSum });
-      newArr.push(el);
-    });
-
-    return newArr;
-  }
-
-  rowSum();
-
-  function rowSum() {
+    console.log("matrixArr in rowSum function", matrixArr);
     const stringArr = JSON.stringify(matrixArr);
     const matrixArrCopy = JSON.parse(stringArr);
     const newArr = [];
@@ -81,9 +82,10 @@ function Matrix() {
       newArr.push(el);
     });
     console.log("newArr", newArr);
+
     return newArr;
   }
-  rowSum();
+  // rowSum();
 
   return (
     <table>

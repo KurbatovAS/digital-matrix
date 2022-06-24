@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { inputDataSlice } from "./inputData/slice";
-import { matrixArraySlice } from "./matrixArray/slice";
+import { matrixDataSlice } from "./matrixData/slice";
 
 export const store = configureStore({
   reducer: {
     inputData: inputDataSlice.reducer,
-    matrixArray: matrixArraySlice.reducer,
+    matrixData: matrixDataSlice.reducer,
   },
 });

@@ -73,7 +73,7 @@ function Form() {
           name="x"
           min="0"
           max={maxX()}
-          title="May input nubbers from 0 to 100"
+          title="May input numbers"
           required
           placeholder="2"
         />
